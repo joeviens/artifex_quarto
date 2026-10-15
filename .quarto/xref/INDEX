@@ -1,0 +1,11 @@
+{
+  "index.qmd": {
+    "index.html": "b08f0972"
+  },
+  "about.qmd": {
+    "about.html": "a8d1c565"
+  },
+  "projects/ercot_analysis.ipynb": {
+    "ercot_analysis.html": "e987a1b2"
+  }
+}

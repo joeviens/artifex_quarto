@@ -1,0 +1,6 @@
+pyproject.toml
+artifex.egg-info/PKG-INFO
+artifex.egg-info/SOURCES.txt
+artifex.egg-info/dependency_links.txt
+artifex.egg-info/requires.txt
+artifex.egg-info/top_level.txt
