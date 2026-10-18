@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>ercot_analysis – artifex_quarto</title>
+<title>ercot_analysis – Artifex</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -64,7 +64,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </style>
 
 
-<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" integrity="sha384-ZvpUoO/+PpLXR1lu4jmpXWu80pZlYUAfxl5NsBMWOEPSjUn/6Z/hRTt8+pR6L4N2" crossorigin="anonymous"></script><script src="../site_libs/quarto-nav/quarto-nav.js"></script>
 <script src="../site_libs/quarto-nav/headroom.min.js"></script>
 <script src="../site_libs/clipboard/clipboard.min.js"></script>
 <script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
@@ -108,6 +108,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "search-label": "Search"
   }
 }</script>
+<script src="https://cdn.jsdelivr.net/npm/requirejs@2.3.6/require.min.js" integrity="sha384-c9c+LnTbwQ3aujuU7ULEPVvgLs+Fn6fJUvIGTsuu1ZcCf11fiEubah0ttpca4ntM sha384-6V1/AdqZRWk1KAlWbKBlGhN7VG4iE/yAZcO6NZPMF8od0vukrvr0tg4qY6NSrItx" crossorigin="anonymous"></script>
+
+<script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
 
 
 <link rel="stylesheet" href="../styles.css">
@@ -121,7 +124,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
     <a class="navbar-brand" href="../index.html">
-    <span class="navbar-title">artifex_quarto</span>
+    <span class="navbar-title">Artifex</span>
     </a>
   </div>
             <div id="quarto-search" class="" title="Search"></div>
@@ -164,9 +167,232 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <div id="d1f79b44" class="cell" data-execution_count="2">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<p>hi</p>
+<div id="37fe0998" class="cell" data-execution_count="18">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>ercot <span class="op">=</span> pd.read_csv(<span class="st">"ercot_artifex.csv"</span>)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>ercot[<span class="st">"time_utc"</span>] <span class="op">=</span> pd.to_datetime(ercot[<span class="st">"datetime_utc"</span>], <span class="bu">format</span><span class="op">=</span><span class="st">"%m/</span><span class="sc">%d</span><span class="st">/%y %H:%M"</span>)</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>zones <span class="op">=</span> [<span class="st">"LZ_HOUSTON"</span>, <span class="st">"LZ_NORTH"</span>, <span class="st">"LZ_SOUTH"</span>, <span class="st">"LZ_WEST"</span>]</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>LZ <span class="op">=</span> ercot.query(<span class="st">"type == 'LZ' &amp; spn in @zones"</span>)</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>wide <span class="op">=</span> LZ.pivot(index<span class="op">=</span><span class="st">"time_utc"</span>, columns<span class="op">=</span><span class="st">"spn"</span>, values<span class="op">=</span><span class="st">"price"</span>).reset_index()</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>wide <span class="op">=</span> (</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>    wide</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>    .assign(</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>        spread<span class="op">=</span><span class="kw">lambda</span> x: x[zones].<span class="bu">max</span>(axis<span class="op">=</span><span class="dv">1</span>) <span class="op">-</span> x[zones].<span class="bu">min</span>(axis<span class="op">=</span><span class="dv">1</span>),</span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>        month<span class="op">=</span><span class="kw">lambda</span> x: x[<span class="st">"time_utc"</span>].dt.month,</span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>        prepost<span class="op">=</span><span class="kw">lambda</span> x: np.where(x[<span class="st">"time_utc"</span>] <span class="op">&lt;</span> <span class="st">"2025-12-05"</span>, <span class="st">"Pre-RTCB"</span>, <span class="st">"Post-RTCB"</span>)</span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>    .query(<span class="st">"month &lt;= 7"</span>)</span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>wide.head()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="18">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th">spn</th>
+<th data-quarto-table-cell-role="th">time_utc</th>
+<th data-quarto-table-cell-role="th">LZ_HOUSTON</th>
+<th data-quarto-table-cell-role="th">LZ_NORTH</th>
+<th data-quarto-table-cell-role="th">LZ_SOUTH</th>
+<th data-quarto-table-cell-role="th">LZ_WEST</th>
+<th data-quarto-table-cell-role="th">spread</th>
+<th data-quarto-table-cell-role="th">month</th>
+<th data-quarto-table-cell-role="th">prepost</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">0</th>
+<td>2025-01-01 06:00:00</td>
+<td>17.90</td>
+<td>17.90</td>
+<td>17.90</td>
+<td>17.90</td>
+<td>0.0</td>
+<td>1</td>
+<td>Pre-RTCB</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">1</th>
+<td>2025-01-01 06:15:00</td>
+<td>17.98</td>
+<td>17.98</td>
+<td>17.98</td>
+<td>17.98</td>
+<td>0.0</td>
+<td>1</td>
+<td>Pre-RTCB</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">2</th>
+<td>2025-01-01 06:30:00</td>
+<td>18.21</td>
+<td>18.21</td>
+<td>18.21</td>
+<td>18.21</td>
+<td>0.0</td>
+<td>1</td>
+<td>Pre-RTCB</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">3</th>
+<td>2025-01-01 06:45:00</td>
+<td>18.22</td>
+<td>18.22</td>
+<td>18.22</td>
+<td>18.22</td>
+<td>0.0</td>
+<td>1</td>
+<td>Pre-RTCB</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">4</th>
+<td>2025-01-01 07:00:00</td>
+<td>17.97</td>
+<td>17.97</td>
+<td>17.97</td>
+<td>17.97</td>
+<td>0.0</td>
+<td>1</td>
+<td>Pre-RTCB</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<div id="9643c866" class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>cutoff <span class="op">=</span> wide.query(<span class="st">"prepost == 'Pre-RTCB'"</span>)[<span class="st">"spread"</span>].quantile(<span class="fl">0.95</span>)</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Cutoff ($/MWh):"</span>, cutoff)</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>unusual <span class="op">=</span> (</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>    wide</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>    .assign(big<span class="op">=</span><span class="kw">lambda</span> x: x[<span class="st">"spread"</span>] <span class="op">&gt;</span> cutoff)</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>    .groupby([<span class="st">"month"</span>, <span class="st">"prepost"</span>], as_index<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>    .agg(pct_big<span class="op">=</span>(<span class="st">"big"</span>, <span class="st">"mean"</span>))</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>    .assign(pct_big<span class="op">=</span><span class="kw">lambda</span> x: x[<span class="st">"pct_big"</span>] <span class="op">*</span> <span class="dv">100</span>)</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>unusual.head()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Cutoff ($/MWh): 62.94</code></pre>
+</div>
+<div class="cell-output cell-output-display" data-execution_count="21">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">month</th>
+<th data-quarto-table-cell-role="th">prepost</th>
+<th data-quarto-table-cell-role="th">pct_big</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">0</th>
+<td>1</td>
+<td>Post-RTCB</td>
+<td>5.477151</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">1</th>
+<td>1</td>
+<td>Pre-RTCB</td>
+<td>7.892954</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">2</th>
+<td>2</td>
+<td>Post-RTCB</td>
+<td>1.822917</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">3</th>
+<td>2</td>
+<td>Pre-RTCB</td>
+<td>8.928571</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">4</th>
+<td>3</td>
+<td>Post-RTCB</td>
+<td>2.688172</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<div id="13490839" class="cell" data-execution_count="1">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>ax <span class="op">=</span> sns.barplot(</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>    data<span class="op">=</span>unusual,</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>    x<span class="op">=</span><span class="st">"month"</span>,</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>    y<span class="op">=</span><span class="st">"pct_big"</span>,</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>    hue<span class="op">=</span><span class="st">"prepost"</span>,</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>    hue_order<span class="op">=</span>[<span class="st">"Pre-RTCB"</span>, <span class="st">"Post-RTCB"</span>]</span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>ax.<span class="bu">set</span>(</span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>    title<span class="op">=</span><span class="st">"Monthly Amounts of </span><span class="ch">\"</span><span class="st">Unusually</span><span class="ch">\"</span><span class="st"> Large Spatial Price Spreads Before and After RTC+B"</span>,</span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>    xlabel<span class="op">=</span><span class="st">"Month"</span>,</span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>    ylabel<span class="op">=</span><span class="st">"</span><span class="sc">% o</span><span class="st">f 15-minute intervals with unusually large spread"</span>,</span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>    xticklabels<span class="op">=</span>[<span class="st">"Jan"</span>, <span class="st">"Feb"</span>, <span class="st">"Mar"</span>, <span class="st">"Apr"</span>, <span class="st">"May"</span>, <span class="st">"Jun"</span>, <span class="st">"Jul"</span>]</span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>sns.move_legend(ax, <span class="st">"upper right"</span>, title<span class="op">=</span><span class="st">"Period"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-error">
+<div class="ansi-escaped-output">
+<pre><span class="ansi-red-fg">---------------------------------------------------------------------------</span>
+
+<span class="ansi-red-fg">NameError</span>                                 Traceback (most recent call last)
+
+Cell <span class="ansi-green-fg">In[1], line 1</span>
+
+<span class="ansi-green-fg">----&gt; 1</span> ax <span style="color:rgb(98,98,98)">=</span> <span class="ansi-yellow-bg">sns</span><span style="color:rgb(98,98,98)">.</span>barplot(
+
+<span class="ansi-green-fg ansi-bold">      2</span>     data<span style="color:rgb(98,98,98)">=</span>unusual,
+
+<span class="ansi-green-fg ansi-bold">      3</span>     x<span style="color:rgb(98,98,98)">=</span><span style="color:rgb(175,0,0)">"</span><span style="color:rgb(175,0,0)">month</span><span style="color:rgb(175,0,0)">"</span>,
+
+<span class="ansi-green-fg ansi-bold">      4</span>     y<span style="color:rgb(98,98,98)">=</span><span style="color:rgb(175,0,0)">"</span><span style="color:rgb(175,0,0)">pct_big</span><span style="color:rgb(175,0,0)">"</span>,
+
+<span class="ansi-green-fg ansi-bold">      5</span>     hue<span style="color:rgb(98,98,98)">=</span><span style="color:rgb(175,0,0)">"</span><span style="color:rgb(175,0,0)">prepost</span><span style="color:rgb(175,0,0)">"</span>,
+
+<span class="ansi-green-fg ansi-bold">      6</span>     hue_order<span style="color:rgb(98,98,98)">=</span>[<span style="color:rgb(175,0,0)">"</span><span style="color:rgb(175,0,0)">Pre-RTCB</span><span style="color:rgb(175,0,0)">"</span>, <span style="color:rgb(175,0,0)">"</span><span style="color:rgb(175,0,0)">Post-RTCB</span><span style="color:rgb(175,0,0)">"</span>]
+
+<span class="ansi-green-fg ansi-bold">      7</span> )
+
+<span class="ansi-green-fg ansi-bold">      8</span> ax<span style="color:rgb(98,98,98)">.</span>set(
+
+<span class="ansi-green-fg ansi-bold">      9</span>     title<span style="color:rgb(98,98,98)">=</span><span style="color:rgb(175,0,0)">"</span><span style="color:rgb(175,0,0)">Monthly Amounts of </span><span style="font-weight:bold;color:rgb(175,95,0)">\"</span><span style="color:rgb(175,0,0)">Unusually</span><span style="font-weight:bold;color:rgb(175,95,0)">\"</span><span style="color:rgb(175,0,0)"> Large Spatial Price Spreads Before and After RTC+B</span><span style="color:rgb(175,0,0)">"</span>,
+
+<span class="ansi-green-fg ansi-bold">     10</span>     xlabel<span style="color:rgb(98,98,98)">=</span><span style="color:rgb(175,0,0)">"</span><span style="color:rgb(175,0,0)">Month</span><span style="color:rgb(175,0,0)">"</span>,
+
+<span class="ansi-green-fg ansi-bold">     11</span>     ylabel<span style="color:rgb(98,98,98)">=</span><span style="color:rgb(175,0,0)">"</span><span style="font-weight:bold;color:rgb(175,95,135)">% o</span><span style="color:rgb(175,0,0)">f 15-minute intervals with unusually large spread</span><span style="color:rgb(175,0,0)">"</span>,
+
+<span class="ansi-green-fg ansi-bold">     12</span>     xticklabels<span style="color:rgb(98,98,98)">=</span>[<span style="color:rgb(175,0,0)">"</span><span style="color:rgb(175,0,0)">Jan</span><span style="color:rgb(175,0,0)">"</span>, <span style="color:rgb(175,0,0)">"</span><span style="color:rgb(175,0,0)">Feb</span><span style="color:rgb(175,0,0)">"</span>, <span style="color:rgb(175,0,0)">"</span><span style="color:rgb(175,0,0)">Mar</span><span style="color:rgb(175,0,0)">"</span>, <span style="color:rgb(175,0,0)">"</span><span style="color:rgb(175,0,0)">Apr</span><span style="color:rgb(175,0,0)">"</span>, <span style="color:rgb(175,0,0)">"</span><span style="color:rgb(175,0,0)">May</span><span style="color:rgb(175,0,0)">"</span>, <span style="color:rgb(175,0,0)">"</span><span style="color:rgb(175,0,0)">Jun</span><span style="color:rgb(175,0,0)">"</span>, <span style="color:rgb(175,0,0)">"</span><span style="color:rgb(175,0,0)">Jul</span><span style="color:rgb(175,0,0)">"</span>]
+
+<span class="ansi-green-fg ansi-bold">     13</span> )
+
+<span class="ansi-green-fg ansi-bold">     14</span> sns<span style="color:rgb(98,98,98)">.</span>move_legend(ax, <span style="color:rgb(175,0,0)">"</span><span style="color:rgb(175,0,0)">upper right</span><span style="color:rgb(175,0,0)">"</span>, title<span style="color:rgb(98,98,98)">=</span><span style="color:rgb(175,0,0)">"</span><span style="color:rgb(175,0,0)">Period</span><span style="color:rgb(175,0,0)">"</span>)
+
+
+
+<span class="ansi-red-fg">NameError</span>: name 'sns' is not defined</pre>
+</div>
+</div>
+</div>
 
 
 
