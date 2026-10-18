@@ -1,0 +1,23 @@
+[
+  {
+    "objectID": "about.html",
+    "href": "about.html",
+    "title": "About",
+    "section": "",
+    "text": "About this site"
+  },
+  {
+    "objectID": "projects/ercot_analysis.html",
+    "href": "projects/ercot_analysis.html",
+    "title": "Artifex",
+    "section": "",
+    "text": "import pandas as pd\nimport numpy as np\nimport seaborn as sns\n\n\nercot = pd.read_csv(\"ercot_artifex.csv\")\nercot[\"time_utc\"] = pd.to_datetime(ercot[\"datetime_utc\"], format=\"%m/%d/%y %H:%M\")\n\nzones = [\"LZ_HOUSTON\", \"LZ_NORTH\", \"LZ_SOUTH\", \"LZ_WEST\"]\n\nLZ = ercot.query(\"type == 'LZ' & spn in @zones\")\nwide = LZ.pivot(index=\"time_utc\", columns=\"spn\", values=\"price\").reset_index()\n\nwide = (\n    wide\n    .assign(\n        spread=lambda x: x[zones].max(axis=1) - x[zones].min(axis=1),\n        month=lambda x: x[\"time_utc\"].dt.month,\n        prepost=lambda x: np.where(x[\"time_utc\"] &lt; \"2025-12-05\", \"Pre-RTCB\", \"Post-RTCB\")\n    )\n    .query(\"month &lt;= 7\")\n)\nwide.head()\n\n\n---------------------------------------------------------------------------\n\nModuleNotFoundError                       Traceback (most recent call last)\n\nCell In[5], line 7\n\n      4 zones = [\"LZ_HOUSTON\", \"LZ_NORTH\", \"LZ_SOUTH\", \"LZ_WEST\"]\n\n      6 LZ = ercot.query(\"type == 'LZ' & spn in @zones\")\n\n----&gt; 7 wide = LZ.pivot(index=\"time_utc\", columns=\"spn\", values=\"price\").reset_index()\n\n      9 wide = (\n\n     10     wide\n\n     11     .assign(\n\n   (...)\n\n     16     .query(\"month &lt;= 7\")\n\n     17 )\n\n     18 wide.head()\n\n\n\nFile ~/Desktop/artifex_quarto/.venv/lib/python3.14/site-packages/pandas/core/frame.py:10988, in pivot(self, columns, index, values)\n\n\n\nFile ~/Desktop/artifex_quarto/.venv/lib/python3.14/site-packages/pandas/core/reshape/pivot.py:910, in pivot(data, columns, index, values)\n\n\n\nFile ~/Desktop/artifex_quarto/.venv/lib/python3.14/site-packages/pandas/core/series.py:4499, in unstack(self, level, fill_value, sort)\n\n\n\nModuleNotFoundError: No module named 'pandas.core.reshape.reshape'\n\n\n\n\ncutoff = wide.query(\"prepost == 'Pre-RTCB'\")[\"spread\"].quantile(0.95)\nprint(\"Cutoff ($/MWh):\", cutoff)\n\nunusual = (\n    wide\n    .assign(big=lambda x: x[\"spread\"] &gt; cutoff)\n    .groupby([\"month\", \"prepost\"], as_index=False)\n    .agg(pct_big=(\"big\", \"mean\"))\n    .assign(pct_big=lambda x: x[\"pct_big\"] * 100)\n)\n\nunusual.head()\n\nCutoff ($/MWh): 62.94\n\n\n\n\n\n\n\n\n\nmonth\nprepost\npct_big\n\n\n\n\n0\n1\nPost-RTCB\n5.477151\n\n\n1\n1\nPre-RTCB\n7.892954\n\n\n2\n2\nPost-RTCB\n1.822917\n\n\n3\n2\nPre-RTCB\n8.928571\n\n\n4\n3\nPost-RTCB\n2.688172\n\n\n\n\n\n\n\n\n\nax = sns.barplot(\n    data=unusual,\n    x=\"month\",\n    y=\"pct_big\",\n    hue=\"prepost\",\n    hue_order=[\"Pre-RTCB\", \"Post-RTCB\"]\n)\nax.set(\n    title=\"Monthly Amounts of \\\"Unusually\\\" Large Spatial Price Spreads Before and After RTC+B\",\n    xlabel=\"Month\",\n    ylabel=\"% of 15-minute intervals with unusually large spread\",\n    xticklabels=[\"Jan\", \"Feb\", \"Mar\", \"Apr\", \"May\", \"Jun\", \"Jul\"]\n)\nsns.move_legend(ax, \"upper right\", title=\"Period\")\n\n\n---------------------------------------------------------------------------\n\nNameError                                 Traceback (most recent call last)\n\nCell In[1], line 1\n\n----&gt; 1 ax = sns.barplot(\n\n      2     data=unusual,\n\n      3     x=\"month\",\n\n      4     y=\"pct_big\",\n\n      5     hue=\"prepost\",\n\n      6     hue_order=[\"Pre-RTCB\", \"Post-RTCB\"]\n\n      7 )\n\n      8 ax.set(\n\n      9     title=\"Monthly Amounts of \\\"Unusually\\\" Large Spatial Price Spreads Before and After RTC+B\",\n\n     10     xlabel=\"Month\",\n\n     11     ylabel=\"% of 15-minute intervals with unusually large spread\",\n\n     12     xticklabels=[\"Jan\", \"Feb\", \"Mar\", \"Apr\", \"May\", \"Jun\", \"Jul\"]\n\n     13 )\n\n     14 sns.move_legend(ax, \"upper right\", title=\"Period\")\n\n\n\nNameError: name 'sns' is not defined"
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "artifex_quarto",
+    "section": "",
+    "text": "This is a Quarto website.\nTo learn more about Quarto websites visit https://quarto.org/docs/websites."
+  }
+]
