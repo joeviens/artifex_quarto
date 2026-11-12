@@ -22,6 +22,7 @@ dependencies = [
     { name = "seaborn" },
     { name = "statsmodels" },
     { name = "tomli" },
+    { name = "tzdata" },
 ]
 
 [package.metadata]
@@ -36,6 +37,7 @@ requires-dist = [
     { name = "seaborn" },
     { name = "statsmodels" },
     { name = "tomli", specifier = ">=2.5.0" },
+    { name = "tzdata", specifier = ">=2026.5" },
 ]
 
 [[package]]

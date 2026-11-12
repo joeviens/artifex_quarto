@@ -14,4 +14,5 @@ dependencies = [
     "openpyxl",
     "tomli>=2.5.0",
     "gridstatusio>=0.16.1",
+    "tzdata>=2026.5",
 ]
