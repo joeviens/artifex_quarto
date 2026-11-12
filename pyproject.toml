@@ -12,4 +12,6 @@ dependencies = [
     "statsmodels",
     "scikit-learn",
     "openpyxl",
+    "tomli>=2.5.0",
+    "gridstatusio>=0.16.1",
 ]
