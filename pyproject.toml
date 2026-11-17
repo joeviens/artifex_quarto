@@ -15,4 +15,6 @@ dependencies = [
     "tomli>=2.5.0",
     "gridstatusio>=0.16.1",
     "tzdata>=2026.5",
+    "jupyter>=1.1.1",
+    "ipykernel>=7.4.0",
 ]
