@@ -81,7 +81,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="../site_libs/quarto-html/quarto-syntax-highlighting-63b5708e65d6cd79cd7618c58d0c21e7.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-8d3ad9c781c51ccd60b292c95058b2c2.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-cb61c712ca1a7fe70a83faed8e4da2d7.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -218,58 +218,141 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <tbody>
 <tr class="odd">
 <th data-quarto-table-cell-role="th">0</th>
-<td>2026-11-14 00:00:00-06:00</td>
-<td>2026-11-14 06:00:00+00:00</td>
-<td>2026-11-14 00:15:00-06:00</td>
-<td>2026-11-14 06:15:00+00:00</td>
+<td>2026-11-16 00:00:00-06:00</td>
+<td>2026-11-16 06:00:00+00:00</td>
+<td>2026-11-16 00:15:00-06:00</td>
+<td>2026-11-16 06:15:00+00:00</td>
 <td>LZ_HOUSTON</td>
 <td>Load Zone</td>
 <td>REAL_TIME_15_MIN</td>
-<td>20.99</td>
+<td>37.77</td>
 </tr>
 <tr class="even">
 <th data-quarto-table-cell-role="th">1</th>
-<td>2026-11-14 00:00:00-06:00</td>
-<td>2026-11-14 06:00:00+00:00</td>
-<td>2026-11-14 00:15:00-06:00</td>
-<td>2026-11-14 06:15:00+00:00</td>
+<td>2026-11-16 00:00:00-06:00</td>
+<td>2026-11-16 06:00:00+00:00</td>
+<td>2026-11-16 00:15:00-06:00</td>
+<td>2026-11-16 06:15:00+00:00</td>
 <td>LZ_NORTH</td>
 <td>Load Zone</td>
 <td>REAL_TIME_15_MIN</td>
-<td>20.74</td>
+<td>40.69</td>
 </tr>
 <tr class="odd">
 <th data-quarto-table-cell-role="th">2</th>
-<td>2026-11-14 00:00:00-06:00</td>
-<td>2026-11-14 06:00:00+00:00</td>
-<td>2026-11-14 00:15:00-06:00</td>
-<td>2026-11-14 06:15:00+00:00</td>
+<td>2026-11-16 00:00:00-06:00</td>
+<td>2026-11-16 06:00:00+00:00</td>
+<td>2026-11-16 00:15:00-06:00</td>
+<td>2026-11-16 06:15:00+00:00</td>
 <td>LZ_SOUTH</td>
 <td>Load Zone</td>
 <td>REAL_TIME_15_MIN</td>
-<td>20.06</td>
+<td>28.01</td>
 </tr>
 <tr class="even">
 <th data-quarto-table-cell-role="th">3</th>
-<td>2026-11-14 00:00:00-06:00</td>
-<td>2026-11-14 06:00:00+00:00</td>
-<td>2026-11-14 00:15:00-06:00</td>
-<td>2026-11-14 06:15:00+00:00</td>
+<td>2026-11-16 00:00:00-06:00</td>
+<td>2026-11-16 06:00:00+00:00</td>
+<td>2026-11-16 00:15:00-06:00</td>
+<td>2026-11-16 06:15:00+00:00</td>
 <td>LZ_WEST</td>
 <td>Load Zone</td>
 <td>REAL_TIME_15_MIN</td>
-<td>20.66</td>
+<td>45.93</td>
 </tr>
 <tr class="odd">
 <th data-quarto-table-cell-role="th">4</th>
-<td>2026-11-14 00:15:00-06:00</td>
-<td>2026-11-14 06:15:00+00:00</td>
-<td>2026-11-14 00:30:00-06:00</td>
-<td>2026-11-14 06:30:00+00:00</td>
+<td>2026-11-16 00:15:00-06:00</td>
+<td>2026-11-16 06:15:00+00:00</td>
+<td>2026-11-16 00:30:00-06:00</td>
+<td>2026-11-16 06:30:00+00:00</td>
 <td>LZ_HOUSTON</td>
 <td>Load Zone</td>
 <td>REAL_TIME_15_MIN</td>
-<td>20.90</td>
+<td>41.13</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<div id="0363c5d3" class="cell" data-execution_count="2">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>prices <span class="op">=</span> pd.read_csv(<span class="st">"../data/ercot_spp.csv"</span>)</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>prices.head()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="2">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">interval_start_local</th>
+<th data-quarto-table-cell-role="th">interval_start_utc</th>
+<th data-quarto-table-cell-role="th">interval_end_local</th>
+<th data-quarto-table-cell-role="th">interval_end_utc</th>
+<th data-quarto-table-cell-role="th">location</th>
+<th data-quarto-table-cell-role="th">location_type</th>
+<th data-quarto-table-cell-role="th">market</th>
+<th data-quarto-table-cell-role="th">spp</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">0</th>
+<td>2026-11-16 00:00:00-06:00</td>
+<td>2026-11-16 06:00:00+00:00</td>
+<td>2026-11-16 00:15:00-06:00</td>
+<td>2026-11-16 06:15:00+00:00</td>
+<td>LZ_HOUSTON</td>
+<td>Load Zone</td>
+<td>REAL_TIME_15_MIN</td>
+<td>37.77</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">1</th>
+<td>2026-11-16 00:00:00-06:00</td>
+<td>2026-11-16 06:00:00+00:00</td>
+<td>2026-11-16 00:15:00-06:00</td>
+<td>2026-11-16 06:15:00+00:00</td>
+<td>LZ_NORTH</td>
+<td>Load Zone</td>
+<td>REAL_TIME_15_MIN</td>
+<td>40.69</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">2</th>
+<td>2026-11-16 00:00:00-06:00</td>
+<td>2026-11-16 06:00:00+00:00</td>
+<td>2026-11-16 00:15:00-06:00</td>
+<td>2026-11-16 06:15:00+00:00</td>
+<td>LZ_SOUTH</td>
+<td>Load Zone</td>
+<td>REAL_TIME_15_MIN</td>
+<td>28.01</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">3</th>
+<td>2026-11-16 00:00:00-06:00</td>
+<td>2026-11-16 06:00:00+00:00</td>
+<td>2026-11-16 00:15:00-06:00</td>
+<td>2026-11-16 06:15:00+00:00</td>
+<td>LZ_WEST</td>
+<td>Load Zone</td>
+<td>REAL_TIME_15_MIN</td>
+<td>45.93</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">4</th>
+<td>2026-11-16 00:15:00-06:00</td>
+<td>2026-11-16 06:15:00+00:00</td>
+<td>2026-11-16 00:30:00-06:00</td>
+<td>2026-11-16 06:30:00+00:00</td>
+<td>LZ_HOUSTON</td>
+<td>Load Zone</td>
+<td>REAL_TIME_15_MIN</td>
+<td>41.13</td>
 </tr>
 </tbody>
 </table>

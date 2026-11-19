@@ -64,7 +64,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </style>
 
 
-<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" integrity="sha384-ZvpUoO/+PpLXR1lu4jmpXWu80pZlYUAfxl5NsBMWOEPSjUn/6Z/hRTt8+pR6L4N2" crossorigin="anonymous"></script><script src="../site_libs/quarto-nav/quarto-nav.js"></script>
 <script src="../site_libs/quarto-nav/headroom.min.js"></script>
 <script src="../site_libs/clipboard/clipboard.min.js"></script>
 <script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
@@ -81,7 +81,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="../site_libs/quarto-html/quarto-syntax-highlighting-63b5708e65d6cd79cd7618c58d0c21e7.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-8d3ad9c781c51ccd60b292c95058b2c2.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-cb61c712ca1a7fe70a83faed8e4da2d7.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -109,6 +109,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "search-label": "Search"
   }
 }</script>
+<script src="https://cdn.jsdelivr.net/npm/requirejs@2.3.6/require.min.js" integrity="sha384-c9c+LnTbwQ3aujuU7ULEPVvgLs+Fn6fJUvIGTsuu1ZcCf11fiEubah0ttpca4ntM sha384-6V1/AdqZRWk1KAlWbKBlGhN7VG4iE/yAZcO6NZPMF8od0vukrvr0tg4qY6NSrItx" crossorigin="anonymous"></script>
+
+<script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
 
 
 <link rel="stylesheet" href="../styles.css">
@@ -167,48 +170,264 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 
-<div id="efa83d27" class="cell" data-execution_count="18">
+<div id="efa83d27" class="cell" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div id="5fb6a0f6" class="cell" data-execution_count="19">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.read_csv(<span class="st">"ercot_mcpc_comparison.csv"</span>)</span>
+<div id="5fb6a0f6" class="cell" data-execution_count="2">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.read_csv(<span class="st">"NEW_Ercot_mcpc_comparison.csv"</span>)</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="co">#df.head()</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>df.head()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="2">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">interval_start_local</th>
+<th data-quarto-table-cell-role="th">interval_start_utc</th>
+<th data-quarto-table-cell-role="th">interval_end_local</th>
+<th data-quarto-table-cell-role="th">interval_end_utc</th>
+<th data-quarto-table-cell-role="th">as_type</th>
+<th data-quarto-table-cell-role="th">mcpc</th>
+<th data-quarto-table-cell-role="th">year</th>
+<th data-quarto-table-cell-role="th">window</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">0</th>
+<td>2024-11-20 00:00:00-06:00</td>
+<td>2024-11-20 06:00:00+00:00</td>
+<td>2024-11-20 01:00:00-06:00</td>
+<td>2024-11-20 07:00:00+00:00</td>
+<td>ECRS</td>
+<td>0.04</td>
+<td>2024</td>
+<td>Earlier</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">1</th>
+<td>2024-11-20 00:00:00-06:00</td>
+<td>2024-11-20 06:00:00+00:00</td>
+<td>2024-11-20 01:00:00-06:00</td>
+<td>2024-11-20 07:00:00+00:00</td>
+<td>NSPIN</td>
+<td>0.06</td>
+<td>2024</td>
+<td>Earlier</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">2</th>
+<td>2024-11-20 00:00:00-06:00</td>
+<td>2024-11-20 06:00:00+00:00</td>
+<td>2024-11-20 01:00:00-06:00</td>
+<td>2024-11-20 07:00:00+00:00</td>
+<td>REGDN</td>
+<td>0.29</td>
+<td>2024</td>
+<td>Earlier</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">3</th>
+<td>2024-11-20 00:00:00-06:00</td>
+<td>2024-11-20 06:00:00+00:00</td>
+<td>2024-11-20 01:00:00-06:00</td>
+<td>2024-11-20 07:00:00+00:00</td>
+<td>REGUP</td>
+<td>0.78</td>
+<td>2024</td>
+<td>Earlier</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">4</th>
+<td>2024-11-20 00:00:00-06:00</td>
+<td>2024-11-20 06:00:00+00:00</td>
+<td>2024-11-20 01:00:00-06:00</td>
+<td>2024-11-20 07:00:00+00:00</td>
+<td>RRS</td>
+<td>0.78</td>
+<td>2024</td>
+<td>Earlier</td>
+</tr>
+</tbody>
+</table>
+
 </div>
-<div id="72af872e" class="cell">
+</div>
+</div>
+<div id="72af872e" class="cell" data-execution_count="3">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>df[<span class="st">"time"</span>] <span class="op">=</span> pd.to_datetime(df[<span class="st">"interval_start_local"</span>])</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="co">#df.head()</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>df[<span class="st">"month_day"</span>] <span class="op">=</span> df[<span class="st">"time"</span>].dt.strftime(<span class="st">"%m-</span><span class="sc">%d</span><span class="st">"</span>)</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>fig1 <span class="op">=</span> (</span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>df.query(<span class="st">"as_type == 'NSPIN' "</span>) <span class="co"># filter to just NSPIN</span></span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>.assign(year <span class="op">=</span> <span class="kw">lambda</span> x: df[<span class="st">"time"</span>].dt.year) <span class="co"># add a year column</span></span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>.assign(date <span class="op">=</span>  ) <span class="co"># df["month_day"] = df["time_utc"].dt.strftime("%m-%d") date col (month/ day)</span></span>
-<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>.groupby([<span class="st">"date"</span>, <span class="st">"year"</span>])</span>
-<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>.agg(med_daily <span class="op">=</span> (<span class="st">"mcpc"</span>, <span class="kw">lambda</span> x: x.median()))</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>    df.query(<span class="st">"as_type == 'NSPIN' "</span>) <span class="co"># filter to just NSPIN</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>    .assign(year <span class="op">=</span> <span class="kw">lambda</span> x: df[<span class="st">"time"</span>].dt.year) <span class="co"># add a year column</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>    .assign(date <span class="op">=</span> <span class="kw">lambda</span> x: df[<span class="st">"month_day"</span>])  <span class="co">#date col (month/ day)</span></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>    .groupby([<span class="st">"date"</span>, <span class="st">"year"</span>])</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>    .agg(med_daily <span class="op">=</span> (<span class="st">"mcpc"</span>, <span class="kw">lambda</span> x: x.median()))</span>
 <span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a><span class="co"># df["year"] = df["time_utc"].dt.year</span></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>df[<span class="st">"year"</span>] <span class="op">=</span> df[<span class="st">"time"</span>].dt.year</span>
 <span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a><span class="co"># sns.lineplot( </span></span>
-<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a><span class="co">#     data = fig1,</span></span>
-<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a><span class="co">#     x = "date",</span></span>
-<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a><span class="co">#     y = "med_price",</span></span>
-<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a><span class="co">#     hue = "year"</span></span>
-<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a><span class="co"># )</span></span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>sns.lineplot( </span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>     data <span class="op">=</span> fig1,</span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>     x <span class="op">=</span> <span class="st">"date"</span>,</span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>     y <span class="op">=</span> <span class="st">"med_daily"</span>,</span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>     hue <span class="op">=</span> <span class="st">"year"</span></span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a> )</span>
 <span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a><span class="co">#fig1.head()</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-error">
-<div class="ansi-escaped-output">
-<pre><span class="ansi-cyan-fg">  Cell </span><span class="ansi-green-fg">In[25], line 8</span>
+<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a>fig1.head()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="3">
+<div>
 
-<span class="ansi-red-fg">    .assign(date =  ) # df["month_day"] = df["time_utc"].dt.strftime("%m-%d") date col (month/ day)</span>
 
-            ^
+<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">med_daily</th>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">date</th>
+<th data-quarto-table-cell-role="th">year</th>
+<th data-quarto-table-cell-role="th"></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<th rowspan="2" data-quarto-table-cell-role="th" data-valign="top">11-20</th>
+<th data-quarto-table-cell-role="th">2024</th>
+<td>1.00</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">2025</th>
+<td>0.99</td>
+</tr>
+<tr class="odd">
+<th rowspan="2" data-quarto-table-cell-role="th" data-valign="top">11-21</th>
+<th data-quarto-table-cell-role="th">2024</th>
+<td>1.00</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">2025</th>
+<td>1.02</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">11-22</th>
+<th data-quarto-table-cell-role="th">2024</th>
+<td>1.00</td>
+</tr>
+</tbody>
+</table>
 
-<span class="ansi-red-fg">SyntaxError</span><span class="ansi-red-fg">:</span> expected argument value expression
-</pre>
+</div>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="ancillary_price_analysis_files/figure-html/cell-4-output-2.png" width="554" height="432" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<div id="0c61f48c" class="cell" data-execution_count="4">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>fig2 <span class="op">=</span> (</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    df.query(<span class="st">"as_type == 'ECRS' "</span>) <span class="co"># filter to just ECRS</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    .assign(year <span class="op">=</span> <span class="kw">lambda</span> x: df[<span class="st">"time"</span>].dt.year) <span class="co"># add a year column</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>    .assign(date <span class="op">=</span> <span class="kw">lambda</span> x: df[<span class="st">"month_day"</span>])  <span class="co">#date col (month/ day)</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>    .groupby([<span class="st">"date"</span>, <span class="st">"year"</span>])</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>    .agg(med_daily <span class="op">=</span> (<span class="st">"mcpc"</span>, <span class="kw">lambda</span> x: x.median()))</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>df[<span class="st">"year"</span>] <span class="op">=</span> df[<span class="st">"time"</span>].dt.year</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>sns.lineplot( </span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>     data <span class="op">=</span> fig2,</span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>     x <span class="op">=</span> <span class="st">"date"</span>,</span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>     y <span class="op">=</span> <span class="st">"med_daily"</span>,</span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>     hue <span class="op">=</span> <span class="st">"year"</span></span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a> )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="ancillary_price_analysis_files/figure-html/cell-5-output-1.png" width="567" height="432" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<div id="1f567d8c" class="cell" data-execution_count="5">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>fig3 <span class="op">=</span> (</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>    df.query(<span class="st">"as_type == 'RRS' "</span>) <span class="co"># filter to just RRS</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>    .assign(year <span class="op">=</span> <span class="kw">lambda</span> x: df[<span class="st">"time"</span>].dt.year) <span class="co"># add a year column</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>    .assign(date <span class="op">=</span> <span class="kw">lambda</span> x: df[<span class="st">"month_day"</span>])  <span class="co">#date col (month/ day)</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>    .groupby([<span class="st">"date"</span>, <span class="st">"year"</span>])</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>    .agg(med_daily <span class="op">=</span> (<span class="st">"mcpc"</span>, <span class="kw">lambda</span> x: x.median()))</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>df[<span class="st">"year"</span>] <span class="op">=</span> df[<span class="st">"time"</span>].dt.year</span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>sns.lineplot( </span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>     data <span class="op">=</span> fig3,</span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>     x <span class="op">=</span> <span class="st">"date"</span>,</span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>     y <span class="op">=</span> <span class="st">"med_daily"</span>,</span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>     hue <span class="op">=</span> <span class="st">"year"</span></span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a> )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="ancillary_price_analysis_files/figure-html/cell-6-output-1.png" width="554" height="432" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<div id="976c163e" class="cell" data-execution_count="6">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>fig4 <span class="op">=</span> (</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>    df.query(<span class="st">"as_type == 'REGDN' "</span>) <span class="co"># filter to just REGDN</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>    .assign(year <span class="op">=</span> <span class="kw">lambda</span> x: df[<span class="st">"time"</span>].dt.year) <span class="co"># add a year column</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>    .assign(date <span class="op">=</span> <span class="kw">lambda</span> x: df[<span class="st">"month_day"</span>])  <span class="co">#date col (month/ day)</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>    .groupby([<span class="st">"date"</span>, <span class="st">"year"</span>])</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>    .agg(med_daily <span class="op">=</span> (<span class="st">"mcpc"</span>, <span class="kw">lambda</span> x: x.median()))</span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>df[<span class="st">"year"</span>] <span class="op">=</span> df[<span class="st">"time"</span>].dt.year</span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>sns.lineplot( </span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>     data <span class="op">=</span> fig4,</span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>     x <span class="op">=</span> <span class="st">"date"</span>,</span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>     y <span class="op">=</span> <span class="st">"med_daily"</span>,</span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>     hue <span class="op">=</span> <span class="st">"year"</span></span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a> )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="ancillary_price_analysis_files/figure-html/cell-7-output-1.png" width="567" height="432" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<div id="b87e7e56" class="cell" data-execution_count="7">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>fig5 <span class="op">=</span> (</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>    df.query(<span class="st">"as_type == 'REGUP' "</span>) <span class="co"># filter to just REGDN</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>    .assign(year <span class="op">=</span> <span class="kw">lambda</span> x: df[<span class="st">"time"</span>].dt.year) <span class="co"># add a year column</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>    .assign(date <span class="op">=</span> <span class="kw">lambda</span> x: df[<span class="st">"month_day"</span>])  <span class="co">#date col (month/ day)</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>    .groupby([<span class="st">"date"</span>, <span class="st">"year"</span>])</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>    .agg(med_daily <span class="op">=</span> (<span class="st">"mcpc"</span>, <span class="kw">lambda</span> x: x.median()))</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>df[<span class="st">"year"</span>] <span class="op">=</span> df[<span class="st">"time"</span>].dt.year</span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>sns.lineplot( </span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>     data <span class="op">=</span> fig5,</span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>     x <span class="op">=</span> <span class="st">"date"</span>,</span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>     y <span class="op">=</span> <span class="st">"med_daily"</span>,</span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>     hue <span class="op">=</span> <span class="st">"year"</span></span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a> )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="ancillary_price_analysis_files/figure-html/cell-8-output-1.png" width="554" height="432" class="figure-img"></p>
+</figure>
 </div>
 </div>
 </div>
