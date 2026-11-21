@@ -1,27 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://joeviens.github.io/artifex_quarto/projects/ercot_analysis.html</loc>
-    <lastmod>2026-11-20T21:51:37.384Z</lastmod>
-  </url>
-  <url>
     <loc>https://joeviens.github.io/artifex_quarto/index.html</loc>
-    <lastmod>2026-11-20T21:51:37.381Z</lastmod>
+    <lastmod>2026-11-21T20:34:47.280Z</lastmod>
   </url>
   <url>
-    <loc>https://joeviens.github.io/artifex_quarto/data/ancillary_price_analysis.html</loc>
-    <lastmod>2026-11-20T21:51:37.380Z</lastmod>
-  </url>
-  <url>
-    <loc>https://joeviens.github.io/artifex_quarto/about.html</loc>
-    <lastmod>2026-11-20T21:51:37.377Z</lastmod>
+    <loc>https://joeviens.github.io/artifex_quarto/projects/ercot_analysis.html</loc>
+    <lastmod>2026-11-21T20:34:47.283Z</lastmod>
   </url>
   <url>
     <loc>https://joeviens.github.io/artifex_quarto/data/ercot_price_analysis.html</loc>
-    <lastmod>2026-11-20T21:51:37.380Z</lastmod>
+    <lastmod>2026-11-21T20:34:47.279Z</lastmod>
+  </url>
+  <url>
+    <loc>https://joeviens.github.io/artifex_quarto/data/ancillary_price_analysis.html</loc>
+    <lastmod>2026-11-21T20:34:47.279Z</lastmod>
+  </url>
+  <url>
+    <loc>https://joeviens.github.io/artifex_quarto/about.html</loc>
+    <lastmod>2026-11-21T20:34:47.276Z</lastmod>
   </url>
   <url>
     <loc>https://joeviens.github.io/artifex_quarto/projects/ercot.html</loc>
-    <lastmod>2026-11-20T21:52:10.800Z</lastmod>
+    <lastmod>2026-11-21T20:35:36.279Z</lastmod>
   </url>
 </urlset>
